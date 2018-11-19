@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<script>
+    // http://www.voidcn.com/article/p-ythhkerx-th.html
+    function n(x) {
+        if (x < 2) {
+            return 1;
+        } else {
+            return x * n(x - 1);
+        }
+    }
+
+    window.calcp = function (total) {
+
+        var p = 0;
+        var single = Math.pow(0.5, total);
+        for (var i = 5; i <= total; i++) {
+            p += n(total) / (n(i) * n(total - i)) * single;
+        }
+        console.log('扔出大于等于 5 次的概率 = ' + p);
+        var p2 = 0;
+    // 反解，计算不大于 5 次的概率
+        for (var i = 5; i >= 0; i--) {
+            p2 += n(total) / (n(i) * n(total - i)) * single;
+        }
+        console.log('扔出小于 5 次的概率 = ' + p2);
+        return p;
+    }
+</script>
+
+<body>
+    <p style =" color: red;">丢硬币的统计：</p>
+    <p>假设丢硬币，每次丢到正面的概率是 0.5；请问需要丢多少次会看到 5 次正面？</p>
+    <div>
+        <label style="font-size:20px;">参考答案：</label>扔 16 次，出现 5 的概率是 <script>
+            document.write(calcp(16))
+        </script>
+    </div>
+    <p>怎么算出来的？看源码。</p>
+</body>
+
+</html>
